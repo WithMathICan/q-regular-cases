@@ -7,10 +7,10 @@ export const isEditMode = ref(false)
 export const categories = ref([])
 export const isAppInit = ref(false)
 export const itemsToShow = {
-   // cases: { title: 'Дела', usingDays: true },
-   // foodfirst: { title: 'Первые блюда', usingDays: false },
-   // foodsecond: { title: 'Вторые блюда', usingDays: false },
-   // cakes: { title: 'Десерты', usingDays: false },
+   cases: { title: 'Дела', usingDays: true },
+   foodfirst: { title: 'Первые блюда', usingDays: false },
+   foodsecond: { title: 'Вторые блюда', usingDays: false },
+   cakes: { title: 'Десерты', usingDays: false },
 }
 
 export const store = reactive({})
