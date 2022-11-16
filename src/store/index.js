@@ -1,4 +1,5 @@
-import { ref, reactive } from 'vue'
+import { ref } from 'vue'
+import { allItems } from './items'
 
 
 export const pageTitle = ref("")
@@ -7,18 +8,16 @@ export const isEditMode = ref(false)
 export const categories = ref([])
 export const isAppInit = ref(false)
 export const itemsToShow = {
-   cases: { title: 'Дела', usingDays: true },
-   foodfirst: { title: 'Первые блюда', usingDays: false },
-   foodsecond: { title: 'Вторые блюда', usingDays: false },
-   cakes: { title: 'Десерты', usingDays: false },
+   cases: { title: 'Дела', type: 'regular' },
+   foodfirst: { title: 'Первые блюда', type: 'repeated' },
+   foodsecond: { title: 'Вторые блюда', type: 'repeated' },
+   cakes: { title: 'Десерты', type: 'repeated' },
 }
-
-export const store = reactive({})
 
 export function initApp(){
    let data = readData('categories')
    console.log(data);
-   store['categories'] = data
+   allItems['categories'] = data
    isAppInit.value = true
 }
 
@@ -44,18 +43,18 @@ export const categoryTypes = [
 ]
 
 function saveData(dataKey){
-   localStorage.setItem(dataKey, JSON.stringify(store[dataKey]))
+   localStorage.setItem(dataKey, JSON.stringify(allItems[dataKey]))
 }
 
 export function init(){
    let dataKey = itemsKey.value
    let data = readData(dataKey)
-   store[dataKey] = data
+   allItems[dataKey] = data
 }
 
 export function create(item){
    let dataKey = itemsKey.value
-   store[dataKey] = [item, ...store[dataKey]]
+   allItems[dataKey] = [item, ...allItems[dataKey]]
    saveData(dataKey)
 }
 
@@ -66,7 +65,7 @@ export function save(){
 
 export function remove(item){
    let dataKey = itemsKey.value
-   store[dataKey] = store[dataKey].filter(el => el !== item)
+   allItems[dataKey] = allItems[dataKey].filter(el => el !== item)
    saveData(dataKey)
 }
 

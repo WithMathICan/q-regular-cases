@@ -19,7 +19,9 @@
 
 <script>
 import { defineComponent, ref, watch } from 'vue';
-import { removeItem } from "src/store/items"
+// import { removeItem } from "src/store/items"
+import { remove } from 'src/store';
+
 
 export default defineComponent({
    props: ['item', 'closeExpanded'],
@@ -32,7 +34,7 @@ export default defineComponent({
       }
 
       function deleteItem() {
-         removeItem(props.item)
+         remove(props.item)
          confirm.value = false
       }
 

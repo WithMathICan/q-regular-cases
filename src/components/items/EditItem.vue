@@ -6,9 +6,10 @@
          </q-card-section>
 
          <q-card-section class="q-pt-none" >
-            <q-input label="Название" v-model="item.title" autofocus />
-            <q-input label="Описание" v-model="item.description" />
-            <q-input  v-if="usingDays" label="Регулярность (количество дней)" v-model.number="item.days" />
+            <RegularItemsForm v-if="itemsType === 'regular'" :item="item" />
+            <MainDateItemsForm v-if="itemsType === 'main-date'" :item="item" />
+            <ToDoItemsForm v-if="itemsType === 'to-do'" :item="item" />
+            <RepeatedItemsForm v-if="itemsType === 'repeated'" :item="item" />
          </q-card-section>
 
          <q-card-actions align="right">
@@ -21,8 +22,12 @@
 </template>
 
 <script>
-import { usingDays, saveItems } from 'src/store/items'
+import { itemsType, saveItems } from 'src/store/items'
 import { defineComponent, ref, watch } from 'vue'
+import MainDateItemsForm from '../edit-forms/MainDateItemsForm.vue';
+import RegularItemsForm from '../edit-forms/RegularItemsForm.vue'
+import RepeatedItemsForm from '../edit-forms/RepeatedItemsForm.vue';
+import ToDoItemsForm from '../edit-forms/ToDoItemsForm.vue';
 export default defineComponent({
    props: ['item', 'closeExpanded'],
    setup(props){
@@ -44,9 +49,10 @@ export default defineComponent({
       }
 
       return {
-         prompt, usingDays, 
+         prompt, itemsType, 
          changeItem, undoChanges, saveItems
       }
-   }
+   },
+   components: { RegularItemsForm, MainDateItemsForm, ToDoItemsForm, RepeatedItemsForm }
 })
 </script>

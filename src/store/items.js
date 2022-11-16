@@ -78,12 +78,12 @@ export function removeItem(item) {
    saveItems()
 }
 
-export let usingDays = computed(() => itemsToShow[itemsKey.value].usingDays)
+export let itemsType = computed(() => itemsToShow[itemsKey.value].type)
 
 export const sortedItems = computed(() => {
    let items = allItems[itemsKey.value]
    if (!Array.isArray(items)) return []
-   if (usingDays.value){
+   if (itemsType.value === 'regular'){
       return items.sort((a,b) => Math.sign(a.MsToShoudDo - b.MsToShoudDo))
    }
    return items.sort((a,b) => Math.sign(a.done_at - b.done_at))

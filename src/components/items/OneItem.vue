@@ -6,10 +6,9 @@
           {{ item.title }}
           <span class="text-grey-6" v-if="item.days > 0">(Раз в {{ item.days }} д.)</span>
         </q-item-label>
-        <q-item-label v-if="usingDays" :class="item.ClassOfToShouldDo" caption>{{ item.TextToShouldDo }}</q-item-label>
-        <q-item-label v-if="!usingDays" caption>
-          Сделанно {{ hoursToString(item.HoursAgo) }} назад
-        </q-item-label>
+
+        <SubtitleToShouldDo v-if="itemsType='regular'" :item="item" />
+        <SubtitleMadesHoursAgo v-else :item="item" />
       </q-item-section>
     </template>
 
@@ -37,19 +36,21 @@
 
 <script>
 import { defineComponent, ref } from 'vue';
-import { usingDays, hoursToString } from 'src/store/items'
+import { itemsType, hoursToString } from 'src/store/items'
 import EditItem from 'src/components/items/EditItem.vue'
 import RemoveItem from 'src/components/items/RemoveItem.vue'
 import SetItemDone from 'src/components/items/SetItemDone.vue'
+import SubtitleToShouldDo from '../one-item-elements/SubtitleToShouldDo.vue';
+import SubtitleMadesHoursAgo from '../one-item-elements/SubtitleMadesHoursAgo.vue';
 export default defineComponent({
   props: ['item'],
-  components: { EditItem, RemoveItem, SetItemDone },
+  components: { EditItem, RemoveItem, SetItemDone, SubtitleToShouldDo, SubtitleMadesHoursAgo },
   setup() {
     let expanded = ref(false)
     function closeExpanded(v){
       if (v == false) expanded.value = false
     }
-    return { usingDays, expanded, hoursToString, closeExpanded }
+    return { itemsType, expanded, hoursToString, closeExpanded }
   }
 })
 </script>
