@@ -1,5 +1,5 @@
 <template>
-  <q-expansion-item v-model="expanded">
+  <q-expansion-item :class="{'expanded-item': expanded}" v-model="expanded">
     <template v-slot:header>
       <q-item-section>
         <q-item-label>
@@ -7,24 +7,18 @@
           <span class="text-grey-6" v-if="item.days > 0">(Раз в {{ item.days }} д.)</span>
         </q-item-label>
 
-        <SubtitleToShouldDo v-if="itemsType='regular'" :item="item" />
+        <SubtitleToShouldDo v-if="itemsType=='regular'" :item="item" />
         <SubtitleMadesHoursAgo v-else :item="item" />
       </q-item-section>
     </template>
 
-    <q-card>
+    <q-card :class="{'expanded-item': expanded}">
+      <q-separator />
       <q-card-section >
-        <q-item-label v-if="usingDays" caption>
-          Сделанно {{ item.DoneAt }} ({{ hoursToString(item.HoursAgo) }} назад)
-        </q-item-label>
-        <q-item-label v-if="!usingDays" caption>
-          Сделанно {{ item.DoneAt }}
-        </q-item-label>
+        <SubtitleMadesHoursAgo :item="item" v-if="itemsType=='regular'" />
+        <SubtitleDoneAt v-else :item="item"/>
       </q-card-section>
-      <q-card-section v-if="item.description">
-        {{ item.description }}
-      </q-card-section>
-      <!-- <q-separator /> -->
+      <q-card-section v-if="item.description">{{ item.description }}</q-card-section>
       <q-card-actions>
         <EditItem :item="item" :closeExpanded="closeExpanded" />
         <RemoveItem :item="item" :closeExpanded="closeExpanded" />
@@ -42,9 +36,10 @@ import RemoveItem from 'src/components/items/RemoveItem.vue'
 import SetItemDone from 'src/components/items/SetItemDone.vue'
 import SubtitleToShouldDo from '../one-item-elements/SubtitleToShouldDo.vue';
 import SubtitleMadesHoursAgo from '../one-item-elements/SubtitleMadesHoursAgo.vue';
+import SubtitleDoneAt from '../one-item-elements/SubtitleDoneAt.vue';
 export default defineComponent({
   props: ['item'],
-  components: { EditItem, RemoveItem, SetItemDone, SubtitleToShouldDo, SubtitleMadesHoursAgo },
+  components: { EditItem, RemoveItem, SetItemDone, SubtitleToShouldDo, SubtitleMadesHoursAgo, SubtitleDoneAt },
   setup() {
     let expanded = ref(false)
     function closeExpanded(v){
@@ -54,3 +49,9 @@ export default defineComponent({
   }
 })
 </script>
+
+<style lang="scss">
+.expanded-item {
+  background-color: $yellow-1;
+}
+</style>

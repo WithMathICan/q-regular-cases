@@ -1,5 +1,5 @@
 <template>
-   <q-item-label v-if="!usingDays" caption>
+   <q-item-label caption>
       Сделанно {{ hoursToString(item.HoursAgo) }} назад
    </q-item-label>
 </template>
