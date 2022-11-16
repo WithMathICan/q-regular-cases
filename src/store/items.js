@@ -1,6 +1,11 @@
 import { reactive, computed } from 'vue'
 import { readData, itemsKey, itemsToShow } from '.'
-import { formatDate, msInDay } from './cases'
+
+export const msInDay = 1000 * 60 * 60 * 24
+export function formatDate(num) {
+   let date = new Date(num)
+   return new Intl.DateTimeFormat("ru", { dateStyle: 'long' }).format(date)
+}
 
 export function hoursToString(hours) {
    if (hours < 0) hours = -hours

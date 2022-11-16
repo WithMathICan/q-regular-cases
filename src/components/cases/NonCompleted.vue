@@ -20,7 +20,7 @@
 <script>
 import { defineComponent } from 'vue'
 import { cases } from '../../store'
-import {Cases} from "../../store/cases"
+import {Cases} from "../../store/cases___"
 import SetDone from "../SetDone.vue"
 export default defineComponent({
   name: 'NonCompleted',
