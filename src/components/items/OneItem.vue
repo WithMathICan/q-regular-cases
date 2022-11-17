@@ -4,7 +4,7 @@
       <q-item-section>
         <q-item-label>
           {{ item.title }}
-          <span class="text-grey-6" v-if="item.days > 0">(Раз в {{ item.days }} д.)</span>
+          <span class="text-grey-6" v-if="item.days && item.days > 0">(Раз в {{ item.days }} д.)</span>
         </q-item-label>
         <SubtitleToShouldDo v-if="itemsType=='regular'" :item="item" />
         <SubtitleMadesHoursAgo v-else :item="item" />

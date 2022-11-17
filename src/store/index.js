@@ -1,4 +1,5 @@
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
+import { sortedCategories } from './category'
 import { allItems } from './items'
 
 
@@ -7,12 +8,20 @@ export const itemsKey = ref('')
 export const isEditMode = ref(false)
 export const categories = ref([])
 export const isAppInit = ref(false)
-export const itemsToShow = {
-   cases: { title: 'Дела', type: 'regular' },
-   foodfirst: { title: 'Первые блюда', type: 'repeated' },
-   foodsecond: { title: 'Вторые блюда', type: 'repeated' },
-   cakes: { title: 'Десерты', type: 'repeated' },
-}
+// export const itemsToShow = {
+//    cases: { title: 'Дела', type: 'regular' },
+//    foodfirst: { title: 'Первые блюда', type: 'repeated' },
+//    foodsecond: { title: 'Вторые блюда', type: 'repeated' },
+//    cakes: { title: 'Десерты', type: 'repeated' },
+// }
+
+export const itemsToShow = computed(() => {
+   let items = {}
+   for(let cat of sortedCategories.value){
+      items[cat.alias] = cat
+   }
+   return items
+})
 
 export function initApp(){
    let data = readData('categories')
@@ -35,12 +44,7 @@ export function readData(dataKey){
    return data
 }
 
-export const categoryTypes = [
-   {id: 'regular', title: 'Регулярные дела'},
-   {id: 'repeated', title: 'Повторяемые дела'},
-   {id: 'to-do', title: 'Текущие одноразовые дела'},
-   {id: 'main-date', title: 'Знаменательные даты'}
-]
+
 
 function saveData(dataKey){
    localStorage.setItem(dataKey, JSON.stringify(allItems[dataKey]))

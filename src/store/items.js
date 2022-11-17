@@ -35,7 +35,7 @@ export function TextToShouldDo(item) {
    return `${label}: ${hoursToString(hours)}`
 }
 
-export let itemsType = computed(() => itemsToShow[itemsKey.value].type)
+export let itemsType = computed(() => itemsKey.value === 'categories' ? 'categories' : itemsToShow.value[itemsKey.value].type)
 
 export const sortedItems = computed(() => {
    let items = allItems[itemsKey.value]

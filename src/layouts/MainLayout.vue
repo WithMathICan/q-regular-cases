@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import { defineComponent, ref, onBeforeMount } from 'vue'
+import { defineComponent, ref, onBeforeMount, computed } from 'vue'
 import { pageTitle, isEditMode, itemsKey, itemsToShow, isAppInit, initApp } from "../store"
 import EssentialLink from 'components/EssentialLink.vue'
 import AddNewItem from '../components/items/AddNewItem.vue'
@@ -44,19 +44,23 @@ export default defineComponent({
     onBeforeMount(() => {
       initApp()
     })
-
-    const linksList = Object.keys(itemsToShow).map(key => ({
-      title: itemsToShow[key].title,
-      caption: '',
-      icon: 'school',
-      link: `/items/${key}`
-    }))
-    linksList.push({
-      title: 'Категории',
-      caption: 'Добавляйте и изменяйте категории',
-      icon: 'edit',
-      link: '/categories',
+    const linksList = computed(() => {
+      console.log(itemsToShow);
+      let list = Object.keys(itemsToShow.value).map(key => ({
+        title: itemsToShow.value[key].title,
+        caption: '',
+        icon: 'school',
+        link: `/items/${key}`
+      }))
+      list.push({
+        title: 'Категории',
+        caption: 'Добавляйте и изменяйте категории',
+        icon: 'edit',
+        link: '/categories',
+      })
+      return list
     })
+
 
     return {
       essentialLinks: linksList, leftDrawerOpen,

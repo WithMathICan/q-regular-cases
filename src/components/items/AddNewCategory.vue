@@ -6,10 +6,7 @@
          </q-card-section>
 
          <q-card-section class="q-pt-none">
-            <q-input label="Название" v-model="newItem.title" autofocus />
-            <q-input label="Описание" v-model="newItem.description" />
-            <q-input label="Алиас" v-model="newItem.alias" />
-            <q-select v-model="newItem.type" option-value="id" option-label="title" :emit-value="true" :options="categoryTypes" label="Тип" />
+            <CategoryForm  :item="newItem"/>
          </q-card-section>
 
          <q-card-actions align="right">
@@ -22,8 +19,10 @@
 </template>
 
 <script>
-import { categoryTypes, create } from 'src/store'
+import { create } from 'src/store'
+import { categoryTypes } from 'src/store/category'
 import { defineComponent, ref } from 'vue'
+import CategoryForm from '../edit-forms/CategoryForm.vue'
 export default defineComponent({
    setup(){
       let prompt = ref(false)
@@ -41,7 +40,8 @@ export default defineComponent({
          prompt.value = false
       }
 
-      return {prompt, newItem, categoryTypes, openPrompt, addNewCategory}
-   }
+      return {prompt, newItem, openPrompt, addNewCategory}
+   },
+   components: {CategoryForm}
 })
 </script>

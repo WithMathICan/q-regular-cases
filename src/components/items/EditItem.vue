@@ -6,6 +6,7 @@
          </q-card-section>
 
          <q-card-section class="q-pt-none" >
+            <CategoryForm v-if="itemsType === 'categories'" :item="item" />
             <RegularItemsForm v-if="itemsType === 'regular'" :item="item" />
             <MainDateItemsForm v-if="itemsType === 'main-date'" :item="item" />
             <ToDoItemsForm v-if="itemsType === 'to-do'" :item="item" />
@@ -29,6 +30,7 @@ import MainDateItemsForm from '../edit-forms/MainDateItemsForm.vue';
 import RegularItemsForm from '../edit-forms/RegularItemsForm.vue'
 import RepeatedItemsForm from '../edit-forms/RepeatedItemsForm.vue';
 import ToDoItemsForm from '../edit-forms/ToDoItemsForm.vue';
+import CategoryForm from '../edit-forms/CategoryForm.vue';
 export default defineComponent({
    props: ['item', 'closeExpanded'],
    setup(props){
@@ -54,6 +56,6 @@ export default defineComponent({
          changeItem, undoChanges, save
       }
    },
-   components: { RegularItemsForm, MainDateItemsForm, ToDoItemsForm, RepeatedItemsForm }
+   components: { RegularItemsForm, MainDateItemsForm, ToDoItemsForm, RepeatedItemsForm, CategoryForm }
 })
 </script>
