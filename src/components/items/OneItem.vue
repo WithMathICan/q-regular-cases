@@ -6,14 +6,13 @@
           {{ item.title }}
           <span class="text-grey-6" v-if="item.days > 0">(Раз в {{ item.days }} д.)</span>
         </q-item-label>
-
         <SubtitleToShouldDo v-if="itemsType=='regular'" :item="item" />
         <SubtitleMadesHoursAgo v-else :item="item" />
       </q-item-section>
     </template>
 
     <q-card :class="{'expanded-item': expanded}">
-      <q-separator />
+      <!-- <q-separator /> -->
       <q-card-section >
         <SubtitleMadesHoursAgo :item="item" v-if="itemsType=='regular'" />
         <SubtitleDoneAt v-else :item="item"/>
@@ -30,7 +29,7 @@
 
 <script>
 import { defineComponent, ref } from 'vue';
-import { itemsType, hoursToString } from 'src/store/items'
+import { itemsType } from 'src/store/items'
 import EditItem from 'src/components/items/EditItem.vue'
 import RemoveItem from 'src/components/items/RemoveItem.vue'
 import SetItemDone from 'src/components/items/SetItemDone.vue'
@@ -45,7 +44,7 @@ export default defineComponent({
     function closeExpanded(v){
       if (v == false) expanded.value = false
     }
-    return { itemsType, expanded, hoursToString, closeExpanded }
+    return { itemsType, expanded, closeExpanded }
   }
 })
 </script>
@@ -53,5 +52,8 @@ export default defineComponent({
 <style lang="scss">
 .expanded-item {
   background-color: $yellow-1;
+}
+.expanded-item-title {
+  background-color: $yellow-2;
 }
 </style>

@@ -14,7 +14,7 @@
 
          <q-card-actions align="right">
             <q-btn class="text-primary" flat label="Отмена" @click="undoChanges" v-close-popup />
-            <q-btn  color="positive" label="Изменить" @click="saveItems" v-close-popup />
+            <q-btn  color="positive" label="Изменить" @click="save" v-close-popup />
          </q-card-actions>
       </q-card>
    </q-dialog>
@@ -22,7 +22,8 @@
 </template>
 
 <script>
-import { itemsType, saveItems } from 'src/store/items'
+import { itemsType } from 'src/store/items'
+import {save} from 'src/store'
 import { defineComponent, ref, watch } from 'vue'
 import MainDateItemsForm from '../edit-forms/MainDateItemsForm.vue';
 import RegularItemsForm from '../edit-forms/RegularItemsForm.vue'
@@ -50,7 +51,7 @@ export default defineComponent({
 
       return {
          prompt, itemsType, 
-         changeItem, undoChanges, saveItems
+         changeItem, undoChanges, save
       }
    },
    components: { RegularItemsForm, MainDateItemsForm, ToDoItemsForm, RepeatedItemsForm }

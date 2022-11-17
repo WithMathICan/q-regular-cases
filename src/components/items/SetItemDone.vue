@@ -15,7 +15,7 @@
 
 <script>
 import { defineComponent, ref, watch } from 'vue';
-import { saveItems } from "src/store/items"
+import { save } from "src/store"
 
 export default defineComponent({
    props: ['item', 'closeExpanded'],
@@ -30,7 +30,7 @@ export default defineComponent({
       function doneItem(){
          props.item.done_at = Date.now()
          confirm.value = false
-         saveItems()
+         save()
       }
 
       return {
