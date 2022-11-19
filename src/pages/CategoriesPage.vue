@@ -1,26 +1,27 @@
 <template>
    <q-page>
-      <q-list bordered separator v-if="Array.isArray(sortedCategories)">
-         <OneCategory :key="item" v-for="item in sortedCategories" :item="item"/>
+      {{allItems}}
+      <q-list bordered separator v-if="allItems && Array.isArray(allItems[CATEGORY_KEY])">
+         <OneCategory :key="item" v-for="(item, i) in allItems[CATEGORY_KEY]" :item="item" :item_index="i"/>
       </q-list>
    </q-page>
 </template>
 
 <script>
 const { defineComponent, onBeforeMount } = require('vue');
-import {pageTitle, itemsKey } from '../store'
-import {sortedCategories } from '../store/category'
+import {pageTitle, itemsKey, allItems, CATEGORY_KEY } from '../store'
 import OneCategory from 'src/components/items/OneCategory.vue';
 
 export default defineComponent({
+   components: {OneCategory},
    setup(){
       function initData(){
-         itemsKey.value = 'categories'
+         console.log(allItems);
+         itemsKey.value = CATEGORY_KEY
          pageTitle.value = "Категории"
       }
       onBeforeMount(initData)
-      return {sortedCategories}
-   },
-   components: {OneCategory}
+      return {allItems, CATEGORY_KEY}
+   }
 })
 </script>

@@ -26,7 +26,7 @@ import CategoryForm from '../edit-forms/CategoryForm.vue'
 export default defineComponent({
    setup(){
       let prompt = ref(false)
-      let category0 = { title: '', description: '', alias: '', type: categoryTypes[0].id }
+      let category0 = { title: '', description: '', alias: '', type: categoryTypes[0].id, icon: 'school' }
       
       let newItem = ref({})
       

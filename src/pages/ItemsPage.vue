@@ -7,8 +7,7 @@
 </template>
 
 <script>
-import {pageTitle, itemsKey, itemsToShow, init} from '../store'
-import { sortedItems} from '../store/items'
+import { itemsKey, init, sortedItems} from '../store'
 import { defineComponent, onBeforeMount, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import OneItem from 'src/components/items/OneItem.vue'
@@ -20,7 +19,7 @@ export default defineComponent({
       function initData(){
          if (!route.params.key) return
          itemsKey.value = route.params.key
-         pageTitle.value = itemsToShow.value[itemsKey.value].title
+         // pageTitle.value = itemsToShow.value[itemsKey.value].title
          init()
       }
       onBeforeMount(initData)

@@ -1,5 +1,4 @@
-import { reactive, computed } from 'vue'
-import { itemsKey, itemsToShow } from '.'
+
 
 export const msInDay = 1000 * 60 * 60 * 24
 export function formatDate(num) {
@@ -35,17 +34,6 @@ export function TextToShouldDo(item) {
    return `${label}: ${hoursToString(hours)}`
 }
 
-export let itemsType = computed(() => itemsKey.value === 'categories' ? 'categories' : itemsToShow.value[itemsKey.value].type)
-
-export const sortedItems = computed(() => {
-   let items = allItems[itemsKey.value]
-   if (!Array.isArray(items)) return []
-   if (itemsType.value === 'regular'){
-      return items.sort((a,b) => Math.sign(MsToShoudDo(a) - MsToShoudDo(b)))
-   }
-   return items.sort((a,b) => Math.sign(a.done_at - b.done_at))
-})
-
 export class Item {
    constructor({ title, description = '', done_at = 0, days = 0, id=Date.now() }) {
       this.id = id.toString() + Math.random()
@@ -56,6 +44,4 @@ export class Item {
    }
 }
 
-export const allItems = reactive({
 
-})

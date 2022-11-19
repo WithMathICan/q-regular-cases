@@ -22,8 +22,7 @@
 </template>
 
 <script>
-import { itemsType } from 'src/store/items'
-import { create } from 'src/store'
+import { itemsType, create } from 'src/store'
 import { defineComponent, ref } from 'vue'
 import MainDateItemsForm from '../edit-forms/MainDateItemsForm.vue';
 import RegularItemsForm from '../edit-forms/RegularItemsForm.vue'

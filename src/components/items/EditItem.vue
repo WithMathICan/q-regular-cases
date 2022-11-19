@@ -6,7 +6,7 @@
          </q-card-section>
 
          <q-card-section class="q-pt-none" >
-            <CategoryForm v-if="itemsType === 'categories'" :item="item" />
+            <CategoryForm v-if="itemsType === CATEGORY_KEY" :item="item" />
             <RegularItemsForm v-if="itemsType === 'regular'" :item="item" />
             <MainDateItemsForm v-if="itemsType === 'main-date'" :item="item" />
             <ToDoItemsForm v-if="itemsType === 'to-do'" :item="item" />
@@ -23,8 +23,7 @@
 </template>
 
 <script>
-import { itemsType } from 'src/store/items'
-import {save} from 'src/store'
+import {save, itemsType, CATEGORY_KEY} from 'src/store'
 import { defineComponent, ref, watch } from 'vue'
 import MainDateItemsForm from '../edit-forms/MainDateItemsForm.vue';
 import RegularItemsForm from '../edit-forms/RegularItemsForm.vue'
@@ -52,7 +51,7 @@ export default defineComponent({
       }
 
       return {
-         prompt, itemsType, 
+         prompt, itemsType, CATEGORY_KEY,
          changeItem, undoChanges, save
       }
    },

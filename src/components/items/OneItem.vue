@@ -29,7 +29,7 @@
 
 <script>
 import { defineComponent, ref } from 'vue';
-import { itemsType } from 'src/store/items'
+import { itemsType } from 'src/store'
 import EditItem from 'src/components/items/EditItem.vue'
 import RemoveItem from 'src/components/items/RemoveItem.vue'
 import SetItemDone from 'src/components/items/SetItemDone.vue'

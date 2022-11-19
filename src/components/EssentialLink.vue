@@ -1,6 +1,6 @@
 <template>
   <q-item clickable tag="router-link" :to="link">
-    <q-item-section v-if="icon" avatar>
+    <q-item-section style="margin-right: -1rem" v-if="icon" avatar >
       <q-icon :name="icon" />
     </q-item-section>
     <q-item-section>
@@ -27,7 +27,7 @@ export default defineComponent({
 
     link: {
       type: String,
-      default: ''
+      default: '/'
     },
 
     icon: {
