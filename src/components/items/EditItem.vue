@@ -6,7 +6,7 @@
          </q-card-section>
 
          <q-card-section class="q-pt-none" >
-            <CategoryForm v-if="itemsType === CATEGORY_KEY" :item="item" />
+            <CategoryForm v-if="itemsType === 'categories'" :item="item" />
             <RegularItemsForm v-if="itemsType === 'regular'" :item="item" />
             <MainDateItemsForm v-if="itemsType === 'main-date'" :item="item" />
             <ToDoItemsForm v-if="itemsType === 'to-do'" :item="item" />

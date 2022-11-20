@@ -7,6 +7,7 @@
 
          <q-card-section class="q-pt-none">
             <CategoryForm  :item="newItem"/>
+            <q-input label="Алиас" v-model="newItem.alias" :rules="[ val => val.trim().length > 2 || 'Минимальная длинна 3 символа']"/>
          </q-card-section>
 
          <q-card-actions align="right">
@@ -19,15 +20,17 @@
 </template>
 
 <script>
-import { create } from 'src/store'
-import { categoryTypes } from 'src/store/category'
+import { allItems, create } from 'src/store'
+import { categoryTypes, CATEGORY_KEY } from 'src/store/category'
 import { defineComponent, ref } from 'vue'
 import CategoryForm from '../edit-forms/CategoryForm.vue'
+import { useQuasar } from 'quasar'
+import slugify from 'slugify'
 export default defineComponent({
    setup(){
       let prompt = ref(false)
       let category0 = { title: '', description: '', alias: '', type: categoryTypes[0].id, icon: 'school' }
-      
+      const $q = useQuasar()
       let newItem = ref({})
       
       function openPrompt(){
@@ -36,11 +39,22 @@ export default defineComponent({
       }
 
       function addNewCategory(){
+         newItem.value.alias = slugify(newItem.value.alias)
+         if (newItem.value.alias.length < 3){
+            $q.notify({message: `Минимальная длина алиаса - три символа, не учитывая пробелы`, color: 'negative', timeout: 5000,})
+            return
+         }
+         for (let cat of allItems[CATEGORY_KEY]){
+            if (cat.alias === newItem.value.alias){
+               $q.notify({message: `Данный алиас уже используется для категории ${cat.title}`, color: 'negative', timeout: 5000,})
+               return
+            }
+         }
          create(newItem.value)
          prompt.value = false
       }
 
-      return {prompt, newItem, openPrompt, addNewCategory}
+      return {prompt, newItem, openPrompt, addNewCategory, slugify}
    },
    components: {CategoryForm}
 })

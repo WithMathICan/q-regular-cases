@@ -1,6 +1,5 @@
 <template>
    <q-page>
-      {{allItems}}
       <q-list bordered separator v-if="allItems && Array.isArray(allItems[CATEGORY_KEY])">
          <OneCategory :key="item" v-for="(item, i) in allItems[CATEGORY_KEY]" :item="item" :item_index="i"/>
       </q-list>
@@ -16,7 +15,6 @@ export default defineComponent({
    components: {OneCategory},
    setup(){
       function initData(){
-         console.log(allItems);
          itemsKey.value = CATEGORY_KEY
          pageTitle.value = "Категории"
       }

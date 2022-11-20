@@ -7,7 +7,7 @@
   "private": true,
   "scripts": {
     "test": "echo \"No test specified\" && exit 0",
-    "dev" : "quasar dev",
+    "dev": "quasar dev",
     "dev:a": "quasar dev -m capacitor -T android",
     "build:a": "quasar build -m capacitor -T android --ide",
     "dev:c": "quasar dev -m android --ide"
@@ -16,6 +16,7 @@
     "@quasar/extras": "^1.0.0",
     "core-js": "^3.6.5",
     "quasar": "^2.6.0",
+    "slugify": "^1.6.5",
     "vue": "^3.0.0",
     "vue-router": "^4.0.0"
   },
