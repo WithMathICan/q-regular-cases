@@ -31,8 +31,8 @@ import ToDoItemsForm from '../edit-forms/ToDoItemsForm.vue';
 export default defineComponent({
    setup() {
       let prompt = ref(false);
-      let item0 = { title: "", description: "", days: 0, done_at: 0 };
-      let newItem = ref({});
+      let item0 = { title: "", description: "", days: 0, done_at: 0, use_year: false };
+      let newItem = ref({...item0});
       function openPrompt() {
          prompt.value = true;
          newItem.value = { ...item0 };

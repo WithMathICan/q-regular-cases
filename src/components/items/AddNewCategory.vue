@@ -39,7 +39,7 @@ export default defineComponent({
       }
 
       function addNewCategory(){
-         newItem.value.alias = slugify(newItem.value.alias)
+         newItem.value.alias = slugify(newItem.value.alias, {lower: true})
          if (newItem.value.alias.length < 3){
             $q.notify({message: `Минимальная длина алиаса - три символа, не учитывая пробелы`, color: 'negative', timeout: 5000,})
             return

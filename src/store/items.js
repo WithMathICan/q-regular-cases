@@ -35,12 +35,13 @@ export function TextToShouldDo(item) {
 }
 
 export class Item {
-   constructor({ title, description = '', done_at = 0, days = 0, id=Date.now() }) {
+   constructor({ title, description = '', done_at = 0, days = 0, id=Date.now(), use_year = false }) {
       this.id = id.toString() + Math.random()
       this.title = title
       this.description = description
       this.done_at = +done_at
       this.days = +days
+      this.use_year = use_year
    }
 }
 
