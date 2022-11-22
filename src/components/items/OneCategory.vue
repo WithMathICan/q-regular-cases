@@ -13,6 +13,7 @@
          <q-card-actions>
             <EditItem :item="item" :closeExpanded="closeExpanded" />
             <RemoveItem :item="item" :closeExpanded="closeExpanded" />
+            <q-btn class="q-ma-xs" :to="'items/'+item.alias" round color="primary" icon="open_in_new" />
             <MoveUp v-if="item_index>0" :index="item_index" />
          </q-card-actions>
       </q-card>

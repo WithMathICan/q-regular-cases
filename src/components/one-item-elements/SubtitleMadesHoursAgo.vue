@@ -1,5 +1,5 @@
 <template>
-   <q-item-label caption>
+   <q-item-label caption v-if="item">
       Сделанно {{ hoursToString(HoursAgo(item)) }} назад
    </q-item-label>
 </template>

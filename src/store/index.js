@@ -3,16 +3,10 @@ import { Category, CATEGORY_KEY, categoryTypes } from './category'
 import { MsToShoudDo } from './items'
 export {CATEGORY_KEY, categoryTypes, typeLabel} from './category'
 
-
-
 export const pageTitle = ref("")
 export const itemsKey = ref('')
 export const isEditMode = ref(false)
 
-
-/**
- * Read all categories, creates menu items
- */
 export function initApp() {
    let data = readData(CATEGORY_KEY)
    allItems[CATEGORY_KEY] = data
@@ -44,11 +38,22 @@ export let itemsType = computed(() => {
    return 'categories' 
 })
 
+const sortRegular = (a, b) => Math.sign(MsToShoudDo(a) - MsToShoudDo(b))
+const sortRepeated = (a, b) => Math.sign(a.done_at - b.done_at)
+const sortMainDate = (a, b) => {
+   let date1 = new Date(a.done_at)
+   let date2 = new Date(b.done_at)
+   date1.setFullYear(2000)
+   date2.setFullYear(2000)
+   return Math.sign(date1.getTime() - date2.getTime())
+}
+
 export const sortedItems = computed(() => {
    let items = allItems[itemsKey.value]
    if (!Array.isArray(items)) return []
-   if (itemsType.value === 'regular') items = items.sort((a,b) => Math.sign(MsToShoudDo(a) - MsToShoudDo(b)))
-   else if (itemsType.value === 'repeated') items.sort((a,b) => Math.sign(a.done_at - b.done_at))
+   if (itemsType.value === 'regular') items = items.sort(sortRegular)
+   else if (itemsType.value === 'repeated') items = items.sort(sortRepeated)
+   else if (itemsType.value === 'main-date') items = items.sort(sortMainDate)
    return items
 })
 

@@ -4,16 +4,15 @@
 
 <script>
 import { defineComponent } from 'vue';
-import { allItems, CATEGORY_KEY, save } from 'src/store';
+import { allItems, itemsKey, save } from 'src/store';
 
 export default defineComponent({
    props: ['index'],
    setup(props){
       function moveUpCategory(){
-         let categories = allItems[CATEGORY_KEY]
-         if (props.index > 0 && props.index < categories.length){
-            console.log(props.index);
-            [categories[props.index-1], categories[props.index]] = [categories[props.index], categories[props.index-1]]
+         let items = allItems[itemsKey.value]
+         if (props.index > 0 && props.index < items.length){
+            [items[props.index-1], items[props.index]] = [items[props.index], items[props.index-1]]
             save()
          }
       }

@@ -1,5 +1,5 @@
 <template>
-   <q-item-label caption>Сделанно {{ DoneAt(item) }}</q-item-label>
+   <q-item-label v-if="item" caption>Сделанно {{ DoneAt(item) }}</q-item-label>
 </template>
 
 <script>

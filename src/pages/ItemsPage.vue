@@ -1,7 +1,7 @@
 <template>
 <q-page>
    <q-list bordered separator v-if="itemsKey && Array.isArray(sortedItems)">
-      <OneItem :key="item" v-for="item in sortedItems" :item="item"/>
+      <OneItem :key="item" v-for="(item, i) in sortedItems" :item="item" :index="i"/>
    </q-list>
 </q-page>
 </template>

@@ -10,12 +10,24 @@ export function formatDate(num) {
       return 'Ошибка в дате'
    }
 }
+
+export function formatDateNoYear(num) {
+   let date = new Date(num)
+   try{
+      return new Intl.DateTimeFormat("ru", { day: 'numeric', month: 'long' }).format(date)
+   } catch(e){
+      console.log(e);
+      return 'Ошибка в дате'
+   }
+}
+
 export function hoursToString(hours) {
    if (hours < 0) hours = -hours
    if (hours <= 24) return `${hours} ч.`
    else return `${Math.floor(hours / 24)} д. ${hours % 24} ч.`
 }
 
+export const DateOfMainDate = item => item.use_year ? formatDate(item.done_at) : formatDateNoYear(item.done_at)
 export const DoneAt = item => formatDate(item.done_at)
 export const MsToShoudDo = item => item.done_at + item.days * msInDay - Date.now()
 export const HoursAgo = item => Math.floor((Date.now() - item.done_at) / 3600000)
